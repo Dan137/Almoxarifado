@@ -8,13 +8,16 @@ package com.almoxarifado.controller;
 import com.almoxarifado.model.Material;
 import com.almoxarifado.model.dao.MaterialDao;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author Daniel
  */
+@ManagedBean (name = "materialBean")
 public class MaterialControler {
-  
+    private Material material;
+    
     public MaterialControler() {
         
     }
@@ -38,4 +41,18 @@ public class MaterialControler {
         return material;
     
 }
+
+    /**
+     * @return the material
+     */
+    public Material getMaterial() {
+        return material;
+    }
+
+    /**
+     * @param material the material to set
+     */
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
 }
