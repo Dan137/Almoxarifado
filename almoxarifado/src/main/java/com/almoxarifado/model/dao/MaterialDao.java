@@ -5,12 +5,14 @@
  */
 package com.almoxarifado.model.dao;
 
+import HibernateUtil.HibernateUtil;
 import com.almoxarifado.model.Material;
-import hibernate.util.HibernateUtil;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import org.hibernate.Transaction;
 
 /**
@@ -20,9 +22,8 @@ import org.hibernate.Transaction;
 public class MaterialDao implements DaoGenerico<Material> {
 
     private static MaterialDao instance;
+    private SessionFactory sessionFactory;
     private Session session;
-    private List<Material> materiais;
-    private SessionFactory sf;
 
     public static MaterialDao getInstance() {
         if (instance == null) {
@@ -33,76 +34,97 @@ public class MaterialDao implements DaoGenerico<Material> {
 
     @Override
     public void cadastrar(Material material) {
-        sf = HibernateUtil.getSessionFactory();
-        session = sf.openSession();
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        session.save(material);
-        tx.commit();
-        session.close();
-        System.out.println("Material cadastrado com sucesso");
+        try {
+            session.save(material);
+            tx.commit();
+        } catch (Exception erroCadMat) {
+            erroCadMat.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public void alterar(Material material) {
-        materiais = MaterialDao.getInstance().listarTudo();
-        sf = HibernateUtil.getSessionFactory();
-        session = sf.openSession();
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        
-        for (Material m : materiais) {
-            if (m.getCodigo() == material.getCodigo()) {
-                m.setNome(material.getNome());
-            }
+        try {
+            session.update(material);
+            tx.commit();
+        } catch (Exception erroAlterMat) {
+            erroAlterMat.printStackTrace();
+        } finally {
+            session.close();
         }
-        session.update(material);
-        tx.commit();
-        session.close();
-        System.out.println("Material Alterado com sucesso");
     }
 
     @Override
     public void deletar(Material material) {
-        List<Material> materiais = MaterialDao.getInstance().listarTudo();
-
-        sf = HibernateUtil.getSessionFactory();
-        session = sf.openSession();
-        for (int i = 0; i < materiais.size(); i++) {
-            if (material.getCodigo() == materiais.get(i).getCodigo()) {
-                material.getCodigo();
-                material.getNome();
-                session.delete(material);
-            }
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            List<Material> consulta = session.createQuery("FROM Material WHERE codigo="+material.getCodigo()).getResultList();
+            material = (Material) consulta.get(0);
+            session.remove(material);
+            tx.commit();
+        } catch (Exception erroRemover) {
+            erroRemover.printStackTrace();
+        } finally {
+            session.close();
         }
-        Transaction tx = session.beginTransaction();
+    }
+    @Override
+        public List<Material> listarTudo() {
 
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        @SuppressWarnings("unchecked")
+            List<Material> result = session.createQuery("FROM Material").getResultList();
         tx.commit();
         session.close();
-        System.out.println("Material deletado com sucesso");
+        return result;
     }
 
     @Override
-    public List<Material> listarTudo() {
-
-        sf = HibernateUtil.getSessionFactory();
-        session = sf.openSession();
+        public Material listaId(Integer codigo){
+            Material material = new Material();
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        Query consult = session.createQuery("from Material");
-        materiais = consult.list();
-        tx.commit();
-        session.close();
-        return materiais;
-    }
-
-    @Override
-    public Material listaId(Integer codigo) {
-        sf = HibernateUtil.getSessionFactory();
-        session = sf.openSession();
-        Transaction tx = session.beginTransaction();
-        Query consult = session.createQuery("from Material where codigo=" + codigo);
-        Material material = (Material) consult.list().get(0);
-        tx.commit();
-        session.close();
+        try {
+            List<Material> consulta = session.createQuery("FROM Material WHERE codigo="+codigo).getResultList();
+            material = (Material) consulta.get(0);
+            tx.commit();
+        } catch (Exception erroRemover) {
+            erroRemover.printStackTrace();
+        } finally {
+            session.close();
+        }
         return material;
-    }
+        } 
+
+//    public static void main(String[] args) throws Exception {
+//        /*
+//         this.codigo = codigo;
+//        this.nome = nome;
+//        this.descricao=descricao;
+//        this.quantidade=quantidade;
+//        this.estado=estado;
+//         */
+////        SessionFactory sessionFactory = HibernateUtil.getSession();
+//////        Session session = sessionFactory.openSession();
+////        Transaction tx = session.beginTransaction();
+////        Material material = new Material(0, "tesourão", "material", 2, "emprestada");
+////        session.persist(material);
+////        tx.commit();
+////        session.close();
+//
+//    }
 
 }

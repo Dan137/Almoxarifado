@@ -22,13 +22,20 @@ public class Material implements Serializable{
     @GeneratedValue
     private Integer codigo;
     private String nome;
+    private String descricao;
+    private int quantidade;
+    private String estado;
 
     public Material() {
     }
 
-    public Material(Integer codigo, String nome) {
+    public Material(Integer codigo, String nome, String descricao, int quantidade, String estado) {
         this.codigo = codigo;
         this.nome = nome;
+        this.descricao=descricao;
+        this.quantidade=quantidade;
+        this.estado=estado;
+        
     }
 
     /**
@@ -58,5 +65,43 @@ public class Material implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    /**
+     * @return the descricao
+     */
+    public String getDescricao() {
+        return descricao;
+    }
+
+    /**
+     * @param descricao the descricao to set
+     */
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    /**
+     * @return the quantidade
+     */
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    /**
+     * @param quantidade the quantidade to set
+     */
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+
     
 }
