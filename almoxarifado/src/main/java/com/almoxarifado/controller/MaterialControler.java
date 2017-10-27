@@ -9,17 +9,20 @@ import com.almoxarifado.model.Material;
 import com.almoxarifado.model.dao.MaterialDao;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author Daniel
  */
 @ManagedBean (name = "materialBean")
+@SessionScoped
 public class MaterialControler {
     private Material material;
+    private Material selectedMaterial;
     
     public MaterialControler() {
-        
+        material = new Material();
     }
     public void cadastrar(Material material){
         MaterialDao.getInstance().cadastrar(material);
@@ -55,4 +58,13 @@ public class MaterialControler {
     public void setMaterial(Material material) {
         this.material = material;
     }
+
+    public Material getSelectedMaterial() {
+        return selectedMaterial;
+    }
+
+    public void setSelectedMaterial(Material selectedMaterial) {
+        this.selectedMaterial = selectedMaterial;
+    }
+    
 }

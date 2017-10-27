@@ -6,6 +6,10 @@
 package com.almoxarifado.model;
 
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.persistence.Column;
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,9 +25,13 @@ public class Material implements Serializable{
     @Id
     @GeneratedValue
     private Integer codigo;
+    @Column (length=50)
     private String nome;
+    @Column (length=200)
     private String descricao;
+    @Column (length = 150)
     private int quantidade;
+    @Column (length = 20)
     private String estado;
 
     public Material() {

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:include src="menu.xhtml"/>
+        <h:form id="formApresentaMaterial">
+            <p:dataTable id="tableMaterial" var="item" value="#{materialBean.listarTudo}"
+                         paginator="true" rows="5" rowKey="#{item.codigo}" selectionMode="single" selection="#{materialBean.selectedMaterial}">
+
+                <f:facet name="header">
+                    Materiais Cadastrados
+                </f:facet>
+                <p:column headerText="Codigo" >
+                    #{item.codigo}
+                </p:column>
+                <p:column headerText="Nome" filterBy="#{item.nome}" >
+                    #{item.nome}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">descricao</f:facet>
+                        #{item.descricao}
+                </p:column>
+                <p:column headerText="quantidade" filterBy="#{item.quantidade}">
+                    #{item.quantidade}
+                </p:column>
+            </p:dataTable>
+            <p:commandButton value="visualizar" oncomplete="PF('widDialVisualizaMaterial').show()"
+                             update="dialVisualizaMaterial"/>
+
+            <p:dialog id="dialVisualizaMaterial" visible="false" modal="true" header="Material cadastrado"
+                      resizable="false" widgetVar="widDialVisualizaMaterial">
+                <p:panelGrid columns="2">
+                    <h:outputText value="Código:"/>
+                    <h:outputText value="#{materialBean.selectedMaterial.codigo}"/>
+
+                    <h:outputText value="Nome:"/>
+                    <h:outputText value="#{materialBean.selectedMaterial.nome}"/>
+
+                    <h:outputText value="descricao:"/>
+                    <h:outputText value="#{materialBean.selectedMaterial.descricao}"/>
+
+                    <h:outputText value="Quantidade:"/>
+                    <h:outputText value="#{materialBean.selectedMaterial.quantidade}"/>
+
+                    <h:outputText value="estado:"/>
+                    <h:outputText value="#{materialBean.selectedMaterial.estado}"/>           
+
+                </p:panelGrid>
+            </p:dialog>
+
+        </h:form>
+    </body>
+</html>

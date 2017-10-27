@@ -6,12 +6,17 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <a href="cadastroMaterial.xhtml">cadastrar material</a>
+       <ui:include src="menu.xhtml"/>
+          <p:growl id="gro" life="4000"/>
+          <h:link outcome="cadastroMaterial" value="Página de boas-vindas do Primefaces" />
+         
     </body>
 </html>
