@@ -48,6 +48,6 @@ Contributor(s):
     <property name="hibernate.connection.password">dnl123321</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="com.almoxarifado.model.Material"/>
-    
+    <mapping class="com.almoxarifado.model.Funcionario"/>
   </session-factory>
 </hibernate-configuration>

@@ -5,7 +5,9 @@
  */
 package HibernateUtil;
 
+import com.almoxarifado.model.Funcionario;
 import com.almoxarifado.model.Material;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -20,8 +22,8 @@ import org.hibernate.cfg.Configuration;
  * @author Daniel
  */
 public class HibernateUtil {
-    static SessionFactory sessionFactory = null;
-   
+    static SessionFactory sessionFactory;
+    
     static {
         try{
         Configuration config = new Configuration();
@@ -30,9 +32,10 @@ public class HibernateUtil {
         builder.applySettings(config.getProperties());
         MetadataSources metadataSources = new MetadataSources();
         metadataSources.addAnnotatedClass(Material.class);
+        metadataSources.addAnnotatedClass(Funcionario.class);
         Metadata metadata = metadataSources.buildMetadata(builder.build());
         sessionFactory = metadata.buildSessionFactory();
-        }catch(Throwable ex){
+        }catch(HibernateException ex){
             System.out.println("aconteceu um erro!!\n");
             throw  new ExceptionInInitializerError(ex);
         }
