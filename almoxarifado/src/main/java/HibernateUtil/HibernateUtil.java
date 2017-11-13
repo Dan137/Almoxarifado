@@ -5,8 +5,9 @@
  */
 package HibernateUtil;
 
+import com.almoxarifado.model.ComprasAutorizadas;
 import com.almoxarifado.model.Funcionario;
-import com.almoxarifado.model.Material;
+import com.almoxarifado.model.Insumo;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -31,8 +32,9 @@ public class HibernateUtil {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(config.getProperties());
         MetadataSources metadataSources = new MetadataSources();
-        metadataSources.addAnnotatedClass(Material.class);
+        metadataSources.addAnnotatedClass(Insumo.class);
         metadataSources.addAnnotatedClass(Funcionario.class);
+        metadataSources.addAnnotatedClass(ComprasAutorizadas.class);
         Metadata metadata = metadataSources.buildMetadata(builder.build());
         sessionFactory = metadata.buildSessionFactory();
         }catch(HibernateException ex){

@@ -6,10 +6,14 @@
 package com.almoxarifado.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,32 +25,35 @@ public class Funcionario implements Serializable {
     @Id
     @GeneratedValue()
     private Integer codigo;
-    @Column(length =20)
+    @Column(length = 25)
     private String matricula;
     @Column(length = 50)
     private String nome;
     @Column(length = 40)
     private String cargo;
-    @Column(length = 11)
-    private String cpf;
-    @Column(length = 8)
-    private String dataAdmissao;
     @Column(length = 15)
+    private String cpf;
+    @Column(length = 15)
+    private String dataAdmissao;
+    @Column(length = 20)
     private String telefone;
+     @OneToMany(targetEntity = Insumo.class, mappedBy = "funcionario", cascade = CascadeType.ALL,
+                fetch = FetchType.EAGER)
+    private List<Insumo> materiais;
 
     public Funcionario() {
     }
-    
-    
 
-    public Funcionario(Integer codigo, String nome, String matricula, String cargo, String cpf, String dataAdmissao, String telefone) {
-        this.codigo=codigo;
+    public Funcionario(Integer codigo, String matricula, String nome, String cargo, String cpf, String dataAdmissao, String telefone /*List<Material> material*/) {
+        this.codigo = codigo;
+        
+        this.matricula = matricula;
         this.nome = nome;
-        this.matricula=matricula;
         this.cargo = cargo;
         this.cpf = cpf;
         this.dataAdmissao = dataAdmissao;
         this.telefone = telefone;
+//        this.materiais = materiais;
     }
 
     public String getNome() {
@@ -104,6 +111,14 @@ public class Funcionario implements Serializable {
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
-    
+
+   
+    public List<Insumo> getMateriais() {
+        return materiais;
+    }
+
+    public void setMateriais(List<Insumo> materiais) {
+        this.materiais = materiais;
+    }
 
 }

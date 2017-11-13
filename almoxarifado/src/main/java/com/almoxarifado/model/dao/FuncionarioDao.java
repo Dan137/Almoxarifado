@@ -21,6 +21,7 @@ public class FuncionarioDao implements FuncionarioModel {
     private static FuncionarioDao instance;
     private SessionFactory sessionFactory;
     private Session session;
+    private List<Funcionario> consulta;
 
     public FuncionarioDao() {
 
@@ -35,12 +36,26 @@ public class FuncionarioDao implements FuncionarioModel {
 
     @Override
     public Funcionario queryByMatricula(String matricula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Funcionario funcionario = new Funcionario();
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            consulta = session.createQuery("from Funcionario where matricula=" + matricula).getResultList();
+            funcionario = consulta.get(0);
+            tx.commit();
+        } catch (Exception erroConsultaMatricula) {
+            System.out.println("não conseguimos buscar pelo matricula!!");
+            erroConsultaMatricula.printStackTrace();
+        }finally{
+            session.close();
+        }
+        return funcionario;
     }
 
     @Override
     public void cadastrar(Funcionario funcionario) {
-       sessionFactory = HibernateUtil.getSessionFactory();
+        sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         try {
@@ -50,14 +65,16 @@ public class FuncionarioDao implements FuncionarioModel {
             System.out.println("erro ao cadastrar o funcionario");
         } finally {
             session.close();
-        }    }
+        }
+    }
 
     @Override
     public void alterar(Funcionario funcionario) {
-         try {
-            sessionFactory = HibernateUtil.getSessionFactory();
-            session = sessionFactory.openSession();
-            Transaction tx = session.beginTransaction();
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+
             session.update(funcionario);
             tx.commit();
         } catch (Exception erroCadFuncionario) {
@@ -68,47 +85,57 @@ public class FuncionarioDao implements FuncionarioModel {
     }
 
     @Override
-    public void deletar(Funcionario t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deletar(Funcionario funcionario) {
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            consulta = session.createQuery("from Funcionario where codigo=" + funcionario.getCodigo()).getResultList();
+            funcionario = consulta.get(0);
+            session.remove(funcionario);
+            tx.commit();
+        } catch (Exception erroDelete) {
+            System.out.println("erro ao deletar");
+            erroDelete.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     @Override
     public List<Funcionario> listarTudo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+
+        try {
+            consulta = session.createQuery("from Funcionario").getResultList();
+            tx.commit();
+        } catch (Exception erroApresentFuncio) {
+            erroApresentFuncio.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return consulta;
     }
 
     @Override
     public Funcionario listaId(Integer codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Funcionario funcionario = new Funcionario();
+        sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            consulta = session.createQuery("from Funcionario where codigo=" + codigo).getResultList();
+            funcionario = consulta.get(0);
+            tx.commit();
+        } catch (Exception erroConsultaFuncionario) {
+            System.out.println("falha na busca");
+            erroConsultaFuncionario.printStackTrace();
+        }finally{
+            session.close();
+        }
+        return funcionario;
     }
 
- 
 }
-
-/*
-@Override
-    public void cadastrar(Funcionario funcionario) {
-        
-
-    }
-
-    @Override
-    public void alterar(Funcionario funcionario) {
-       
-    }
-
-    @Override
-    public void deletar(Funcionario t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Funcionario> listarTudo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Funcionario listaId(Integer codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-*/

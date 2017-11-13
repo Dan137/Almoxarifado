@@ -6,7 +6,7 @@
 package com.almoxarifado.model.dao;
 
 import HibernateUtil.HibernateUtil;
-import com.almoxarifado.model.Material;
+import com.almoxarifado.model.Insumo;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,26 +17,26 @@ import org.hibernate.Transaction;
  *
  * @author Daniel
  */
-public class MaterialDao implements DaoGenerico<Material> {
+public class InsumoDao implements DaoGenerico<Insumo> {
 
-    private static MaterialDao instance;
+    private static InsumoDao instance;
     private SessionFactory sessionFactory;
     private Session session;
 
-    public static MaterialDao getInstance() {
+    public static InsumoDao getInstance() {
         if (instance == null) {
-            instance = new MaterialDao();
+            instance = new InsumoDao();
         }
         return instance;
     }
 
     @Override
-    public void cadastrar(Material material) {
+    public void cadastrar(Insumo insumo) {
         sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            session.save(material);
+            session.save(insumo);
             tx.commit();
         } catch (Exception erroCadMat) {
             erroCadMat.printStackTrace();
@@ -46,12 +46,12 @@ public class MaterialDao implements DaoGenerico<Material> {
     }
 
     @Override
-    public void alterar(Material material) {
+    public void alterar(Insumo insumo) {
         sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            session.update(material);
+            session.update(insumo);
             tx.commit();
         } catch (Exception erroAlterMat) {
             erroAlterMat.printStackTrace();
@@ -61,14 +61,14 @@ public class MaterialDao implements DaoGenerico<Material> {
     }
 
     @Override
-    public void deletar(Material material) {
+    public void deletar(Insumo insumo) {
         sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            List<Material> consulta = session.createQuery("FROM Material WHERE codigo="+material.getCodigo()).getResultList();
-            material = (Material) consulta.get(0);
-            session.remove(material);
+            List<Insumo> consulta = session.createQuery("FROM Insumo WHERE codigo="+insumo.getCodigo()).getResultList();
+            insumo = (Insumo) consulta.get(0);
+            session.remove(insumo);
             tx.commit();
         } catch (Exception erroRemover) {
             erroRemover.printStackTrace();
@@ -77,34 +77,34 @@ public class MaterialDao implements DaoGenerico<Material> {
         }
     }
     @Override
-        public List<Material> listarTudo() {
+        public List<Insumo> listarTudo() {
 
         sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         @SuppressWarnings("unchecked")
-            List<Material> result = session.createQuery("FROM Material").getResultList();
+            List<Insumo> result = session.createQuery("FROM Insumo").getResultList();
         tx.commit();
         session.close();
         return result;
     }
 
     @Override
-        public Material listaId(Integer codigo){
-            Material material = new Material();
+        public Insumo listaId(Integer codigo){
+            Insumo insumo = new Insumo();
         sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            List<Material> consulta = session.createQuery("FROM Material WHERE codigo="+codigo).getResultList();
-            material = (Material) consulta.get(0);
+            List<Insumo> consulta = session.createQuery("FROM Insumo WHERE codigo="+codigo).getResultList();
+            insumo = (Insumo) consulta.get(0);
             tx.commit();
         } catch (Exception erroRemover) {
             erroRemover.printStackTrace();
         } finally {
             session.close();
         }
-        return material;
+        return insumo;
         } 
 
 //    public static void main(String[] args) throws Exception {
@@ -118,7 +118,7 @@ public class MaterialDao implements DaoGenerico<Material> {
 ////        SessionFactory sessionFactory = HibernateUtil.getSession();
 //////        Session session = sessionFactory.openSession();
 ////        Transaction tx = session.beginTransaction();
-////        Material material = new Material(0, "tesourão", "material", 2, "emprestada");
+////        Insumo material = new Insumo(0, "tesourão", "material", 2, "emprestada");
 ////        session.persist(material);
 ////        tx.commit();
 ////        session.close();
