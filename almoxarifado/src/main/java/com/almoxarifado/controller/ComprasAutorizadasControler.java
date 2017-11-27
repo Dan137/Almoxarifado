@@ -7,21 +7,37 @@ package com.almoxarifado.controller;
 
 import com.almoxarifado.model.ComprasAutorizadas;
 import com.almoxarifado.model.dao.ComprasAutorizadasDao;
+import java.util.List;
 
 /**
  *
  * @author Daniel
  */
 public class ComprasAutorizadasControler {
-    
+
     public ComprasAutorizadasControler() {
-        
+
     }
-    public void inserir(ComprasAutorizadas comp_auto){
+
+    public void inserir(ComprasAutorizadas comp_auto) {
         ComprasAutorizadasDao.getInstance().cadastrar(comp_auto);
     }
-    public ComprasAutorizadas buscarID(int id){
+
+    public void altera(ComprasAutorizadas comp_auto) {
+        ComprasAutorizadasDao.getInstance().alterar(comp_auto);
+    }
+    
+    public void delete (ComprasAutorizadas comp_auto){
+        ComprasAutorizadasDao.getInstance().deletar(comp_auto);
+    }
+
+    public ComprasAutorizadas buscarID(int id) {
         return ComprasAutorizadasDao.getInstance().listaId(id);
     }
     
+   public List<ComprasAutorizadas> findAll(){
+       
+       List <ComprasAutorizadas> compras = ComprasAutorizadasDao.getInstance().listarTudo();
+       return compras;
+   }
 }

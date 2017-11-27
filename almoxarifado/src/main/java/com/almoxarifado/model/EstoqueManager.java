@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.almoxarifado.model.dao;
+package com.almoxarifado.model;
 
-import com.almoxarifado.model.Funcionario;
+import java.util.Date;
 
 /**
  *
  * @author Daniel
  */
-public interface FuncionarioModel extends DaoGenerico <Funcionario>{
-   
+public class EstoqueManager {
+    Integer id;
+    Date dataChegada;
+    Date dataSaida;
     
-    public Funcionario queryByMatricula(String matricula);
 }

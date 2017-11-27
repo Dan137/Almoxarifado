@@ -7,6 +7,7 @@ package com.almoxarifado.model.dao.teste;
 
 import com.almoxarifado.controller.FuncionarioControler;
 import com.almoxarifado.model.Funcionario;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class TesteFuncionario {
         String telefone;
         String matricula;
         FuncionarioControler funcionarioCtrl = new FuncionarioControler();
-        Funcionario funcionario;
+
         Scanner sc = new Scanner(System.in);
         int op = 0;
         do {
@@ -38,51 +39,25 @@ public class TesteFuncionario {
             op = sc.nextInt();
             switch (op) {
                 case 1:
-                    System.out.println("informe o nome do funcionario");
-                    nome = sc.next();
 
-                    System.out.println("informe o cargo do funcionario");
-                    cargo = sc.next();
+                    List<Funcionario> lista = new ArrayList<>();
+                   
+                    Funcionario funcionario1 = new Funcionario(0, "20152d13gr0059", "Danie", "A.S.G", "703.968.604-00", "09/03/2017", "(87) 9.8135-5794" /*TesteFuncionario.getMateriais()*/);
+                    Funcionario funcionario2 = new Funcionario(0, "20141d14gr4321", "everton", "A.S.G", "123.456.678-91", "21/02/2017", "(87) 9.8153-3492" /*TesteFuncionario.getMateriais()*/);
+                    Funcionario funcionario3 = new Funcionario(0, "1d123kjfd", "tiago", "gari", "132.132.149.93", "23/03/2014", "(87) 9.8133-3938" /*TesteFuncionario.getMateriais()*/);
 
-                    System.out.println("informe o cpf do funcionario");
-                    cpf = sc.next();
-
-                    System.out.println("informe a data de admissao do funcionario ");
-                    dataAdmissao = sc.next();
-
-                    System.out.println("informe o telefone do funcionario");
-                    telefone = sc.next();
-
-                    System.out.println("informe a matricula do funcionario");
-                    matricula = sc.next();
-
-                    funcionario = new Funcionario(0, matricula, nome, cargo, cpf, dataAdmissao, telefone /*TesteFuncionario.getMateriais()*/);
-                    funcionarioCtrl.cadastrar(funcionario);
+                    lista.add(funcionario1);
+                    lista.add(funcionario2);
+                    lista.add(funcionario3);
+                  
+                    for (Funcionario f : lista){
+                        funcionarioCtrl.cadastrar(f);
+                    }
                     break;
+
                 case 2:
-                    System.out.println("alterar o nome do funcionario");
-                    nome = sc.next();
-
-                    System.out.println("alterar o cargo do funcionario");
-                    cargo = sc.next();
-
-                    System.out.println("alterar o cpf do funcionario");
-                    cpf = sc.next();
-
-                    System.out.println("alterar a data de admissao");
-                    dataAdmissao = sc.next();
-
-                    System.out.println("alterar o telefone do funcionario");
-                    telefone = sc.next();
-
-                    System.out.println("alterar a matricula do funcionario");
-                    matricula = sc.next();
-
-                    System.out.println("informe o codigo do funcionario para alteração");
-                    id = sc.nextInt();
-
-//                    funcionario = new Funcionario(id, nome, matricula, cargo, cpf, dataAdmissao, telefone);
-//                    funcionarioCtrl.alterar(funcionario);
+                    Funcionario funcionario = new Funcionario(27, "2d3c4a", "Noemi", "A.S.G", "153.834.434-02", "09/03/2016", "(87)9.8135-3212");
+                    funcionarioCtrl.alterar(funcionario);
                     break;
                 case 3:
                     List<Funcionario> funcionarios = funcionarioCtrl.listarTodos();
@@ -102,27 +77,27 @@ public class TesteFuncionario {
                 case 4:
                     System.out.println("digite o ID para buscar o funcionario");
                     id = sc.nextInt();
-                    funcionario = funcionarioCtrl.consultaPorId(id);
+                    funcionario1 = funcionarioCtrl.consultaPorId(id);
 
-                    System.out.println("nome: " + funcionario.getNome());
-                    System.out.println("codigo: " + funcionario.getCodigo());
-                    System.out.println("CPF: " + funcionario.getCpf());
-                    System.out.println("matricula: " + funcionario.getMatricula());
-                    System.out.println("cargo: " + funcionario.getCargo());
-                    System.out.println("dataAdmissao: " + funcionario.getDataAdmissao());
-                    System.out.println("telefone: " + funcionario.getTelefone());
+                    System.out.println("nome: " + funcionario1.getNome());
+                    System.out.println("codigo: " + funcionario1.getCodigo());
+                    System.out.println("CPF: " + funcionario1.getCpf());
+                    System.out.println("matricula: " + funcionario1.getMatricula());
+                    System.out.println("cargo: " + funcionario1.getCargo());
+                    System.out.println("dataAdmissao: " + funcionario1.getDataAdmissao());
+                    System.out.println("telefone: " + funcionario1.getTelefone());
                     break;
                 case 5:
                     System.out.println("informe o id para deletar");
                     id = sc.nextInt();
-                    funcionario = funcionarioCtrl.consultaPorId(id);
-                    funcionarioCtrl.deletar(funcionario);
+                    funcionario1 = funcionarioCtrl.consultaPorId(id);
+                    funcionarioCtrl.deletar(funcionario1);
             }
 
         } while (op != 0);
 
     }
-/*
+    /*
     public static List<Material> getMateriais() {
         Scanner sc = new Scanner(System.in);
         Integer id = 0;
@@ -140,5 +115,5 @@ public class TesteFuncionario {
         } while (id != 0);
         return materiais;
     }
-*/
+     */
 }

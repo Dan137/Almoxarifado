@@ -73,12 +73,13 @@ public class ComprasAutorizadasDao implements DaoGenerico<ComprasAutorizadas> {
 
     @Override
     public void deletar(ComprasAutorizadas t) {
+        
        conexao = HibernateUtil.getSessionFactory();
         Session session = conexao.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            this.consulta=session.createQuery("from ComprasAutorizadas where codigo"+ t.getId()).getResultList();
-            t=consulta.get(0);
+            this.consulta=session.createQuery("FROM ComprasAutorizadas WHERE id="+ t.getId()).getResultList();
+            t =  consulta.get(0);
             session.remove(t);
             tx.commit();
         } catch (Exception erroAlteraComprasAutorizadas) {
@@ -107,13 +108,13 @@ public class ComprasAutorizadasDao implements DaoGenerico<ComprasAutorizadas> {
     }
 
     @Override
-    public ComprasAutorizadas listaId(Integer codigo) {
+    public ComprasAutorizadas listaId(Integer id) {
         
         conexao = HibernateUtil.getSessionFactory();
         Session session = conexao.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            this.consulta=session.createQuery("from ComprasAutorizadas where codigo="+ codigo).getResultList();
+            this.consulta=session.createQuery("from ComprasAutorizadas where id="+ id).getResultList();
             comp_auto=consulta.get(0);
             tx.commit();
         } catch (Exception erroAlteraComprasAutorizadas) {

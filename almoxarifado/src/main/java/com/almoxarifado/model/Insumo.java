@@ -29,29 +29,30 @@ public class Insumo implements Serializable {
     private String nome;
     @Column(length = 200)
     private String descricao;
-    @Column(length = 20)
-    private String estado;
     @ManyToOne
-    @JoinColumn(name="compraAutorizada_id")
+    @JoinColumn(name = "compraAutorizada_id")
     private ComprasAutorizadas compraAutorizada;
     @ManyToOne
-    @JoinColumn(name = "funcionario_id")
-    private Funcionario funcionario;
+    @JoinColumn(name = "emprestimo_id")
+    private Emprestimo emprestimo;
+//    @ManyToOne
+//    @JoinColumn(name = "funcionario_id")
+//    private Funcionario funcionario;
     @Column(length = 40)
     private String tipo;
 
     public Insumo() {
     }
 
-    public Insumo(Integer codigo, String nome, String descricao, String estado, ComprasAutorizadas compraAutorizada, Funcionario funcionario, String tipo) {
+    public Insumo(Integer codigo, String nome, String descricao, ComprasAutorizadas compraAutorizada, Emprestimo emprestimo, /*Funcionario funcionario,*/ String tipo) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
-        this.estado = estado;
-        this.compraAutorizada=compraAutorizada;
-        this.funcionario = funcionario;
+        this.compraAutorizada = compraAutorizada;
+        this.emprestimo = emprestimo;
+//        this.funcionario = funcionario;
         this.tipo = tipo;
-        
+
     }
 
     /**
@@ -96,29 +97,28 @@ public class Insumo implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getEstado() {
-        return estado;
+    public Emprestimo getEmprestimo() {
+        return emprestimo;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEmprestimo(Emprestimo emprestimo) {
+        this.emprestimo = emprestimo;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
-
+//    public Funcionario getFuncionario() {
+//        return funcionario;
+//    }
+//
+//    public void setFuncionario(Funcionario funcionario) {
+//        this.funcionario = funcionario;
+//    }
     public String getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
-    } 
+    }
 
     public ComprasAutorizadas getCompraAutorizada() {
         return compraAutorizada;
@@ -127,14 +127,10 @@ public class Insumo implements Serializable {
     public void setCompraAutorizada(ComprasAutorizadas compraAutorizada) {
         this.compraAutorizada = compraAutorizada;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Insumo{" + "codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", estado=" + estado + ", funcionario=" + funcionario + ", tipo=" + tipo + '}';
+        return "Insumo{" + "codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", estado=" +  /*funcionario */ ", tipo=" + tipo + '}';
     }
-    
-   
- 
+
 }

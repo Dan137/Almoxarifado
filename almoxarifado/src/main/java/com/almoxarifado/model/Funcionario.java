@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -37,9 +38,10 @@ public class Funcionario implements Serializable {
     private String dataAdmissao;
     @Column(length = 20)
     private String telefone;
-     @OneToMany(targetEntity = Insumo.class, mappedBy = "funcionario", cascade = CascadeType.ALL,
-                fetch = FetchType.EAGER)
-    private List<Insumo> materiais;
+   
+//     @OneToMany(targetEntity = Insumo.class, mappedBy = "funcionario", cascade = CascadeType.ALL,
+//                fetch = FetchType.EAGER)
+//    private List<Insumo> materiais;
 
     public Funcionario() {
     }
@@ -113,12 +115,12 @@ public class Funcionario implements Serializable {
     }
 
    
-    public List<Insumo> getMateriais() {
-        return materiais;
-    }
-
-    public void setMateriais(List<Insumo> materiais) {
-        this.materiais = materiais;
-    }
+//    public List<Insumo> getMateriais() {
+//        return materiais;
+//    }
+//
+//    public void setMateriais(List<Insumo> materiais) {
+//        this.materiais = materiais;
+//    }
 
 }

@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,37 +23,26 @@ import javax.persistence.TemporalType;
  * @author Daniel
  */
 @Entity
-@Table(name = "compraautorizada")
-public class ComprasAutorizadas implements Serializable {
+public class Emprestimo implements Serializable{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Integer id;
-    @Temporal(TemporalType.DATE)
-    private Date dataCompra;
-    @OneToOne(targetEntity = Funcionario.class, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Funcionario funcionario;
-    @OneToMany(targetEntity = Insumo.class, mappedBy = "compraAutorizada", cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Insumo.class, mappedBy = "emprestimo",cascade = CascadeType.ALL, fetch = FetchType.EAGER) 
     private List<Insumo> insumos;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 
-    public ComprasAutorizadas() {
-
+    public Emprestimo() {
     }
 
-    public ComprasAutorizadas(Integer id, Date dataCompra, List<Insumo> insumos, Funcionario funcionario) {
-        this.dataCompra = dataCompra;
+    public Emprestimo(Integer id, Funcionario funcionario, List<Insumo> insumos, Date date) {
         this.id = id;
+        this.funcionario = funcionario;
         this.insumos = insumos;
-        this.funcionario=funcionario;
-    }
-
-    public Date getDataCompra() {
-        return dataCompra;
-    }
-
-    public void setDataCompra(Date dataCompra) {
-        this.dataCompra = dataCompra;
+        this.date = date;
     }
 
     public Integer getId() {
@@ -65,6 +53,14 @@ public class ComprasAutorizadas implements Serializable {
         this.id = id;
     }
 
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
     public List<Insumo> getInsumos() {
         return insumos;
     }
@@ -72,13 +68,12 @@ public class ComprasAutorizadas implements Serializable {
     public void setInsumos(List<Insumo> insumos) {
         this.insumos = insumos;
     }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public Date getDate() {
+        return date;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 }

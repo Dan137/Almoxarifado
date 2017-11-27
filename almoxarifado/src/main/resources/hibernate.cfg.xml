@@ -46,10 +46,11 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/almoxarifado</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">dnl123321</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.hbm2ddl.auto">create</property>
     <property name="hibernate.show_sql">true</property>
     <mapping class="com.almoxarifado.model.Insumo"/>
     <mapping class="com.almoxarifado.model.Funcionario"/>
     <mapping class="com.almoxarifado.model.ComprasAutorizadas"/>
+    <mapping class="com.almoxarifado.model.Emprestimo"/>
   </session-factory>
 </hibernate-configuration>
