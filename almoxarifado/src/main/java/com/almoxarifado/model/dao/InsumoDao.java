@@ -5,8 +5,8 @@
  */
 package com.almoxarifado.model.dao;
 
-import HibernateUtil.HibernateUtil;
-import com.almoxarifado.model.Insumo;
+import com.almoxarifado.Util.HibernateUtil;
+import com.almoxarifado.model.Entidades.Insumo;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

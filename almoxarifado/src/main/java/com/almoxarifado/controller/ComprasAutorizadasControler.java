@@ -5,7 +5,7 @@
  */
 package com.almoxarifado.controller;
 
-import com.almoxarifado.model.ComprasAutorizadas;
+import com.almoxarifado.model.Entidades.ComprasAutorizadas;
 import com.almoxarifado.model.dao.ComprasAutorizadasDao;
 import java.util.List;
 

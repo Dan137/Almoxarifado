@@ -9,10 +9,10 @@ import com.almoxarifado.controller.ComprasAutorizadasControler;
 import com.almoxarifado.controller.EmprestimoControler;
 import com.almoxarifado.controller.FuncionarioControler;
 import com.almoxarifado.controller.InsumoControler;
-import com.almoxarifado.model.ComprasAutorizadas;
-import com.almoxarifado.model.Emprestimo;
-import com.almoxarifado.model.Funcionario;
-import com.almoxarifado.model.Insumo;
+import com.almoxarifado.model.Entidades.ComprasAutorizadas;
+import com.almoxarifado.model.Entidades.Emprestimo;
+import com.almoxarifado.model.Entidades.Funcionario;
+import com.almoxarifado.model.Entidades.Insumo;
 import com.almoxarifado.model.dao.InsumoDao;
 import java.util.List;
 import java.util.Scanner;
@@ -52,18 +52,16 @@ public class TesteInsumo {
             switch (op) {
                 
                 case 1:
-                    
-                    insumo1 = new Insumo(0, "Tijolo_8Furos", "Unidade", null, null, "material");
+                    insumo1 = new Insumo(0, "Tijolo_8Furos", "Unidade", "disponivel", null, null, "material");
                     insumocontroler.cadastrar(insumo1);
                     break;
                 case 2:
                     
-                    insumo1 = new Insumo(30, "cimento", "saco", getComprasAutorizadas(31),  getEmprestimo(34), "material");
+                    insumo1 = new Insumo(30, "cimento", "saco", "disponivel", getComprasAutorizadas(31),  getEmprestimo(34), "material");
                     insumocontroler.alterar(insumo1);
                     break;
 
                 case 3:
-                   
                     insumo1= insumocontroler.listaId(35);
                     insumocontroler.deletar(insumo1);
                     break;

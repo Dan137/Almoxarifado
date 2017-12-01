@@ -5,18 +5,19 @@
  */
 package com.almoxarifado.model.dao;
 
-import HibernateUtil.HibernateUtil;
-import com.almoxarifado.model.Funcionario;
+import com.almoxarifado.Util.HibernateUtil;
+import com.almoxarifado.model.Entidades.Funcionario;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
  * @author Daniel
  */
-public class FuncionarioDao implements FuncionarioModel {
+public class FuncionarioDao implements FuncionarioInterface {
 
     private static FuncionarioDao instance;
     private SessionFactory sessionFactory;
@@ -35,19 +36,21 @@ public class FuncionarioDao implements FuncionarioModel {
     }
 
     @Override
-    public Funcionario queryByMatricula(String matricula) {
-        Funcionario funcionario = new Funcionario();
+    public Funcionario queryByMatricula(String cpf) {
+        Funcionario funcionario = null;
         sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
+        
         try {
-            consulta = session.createQuery("from Funcionario where matricula=" + matricula).getResultList();
-            funcionario = consulta.get(0);
-            tx.commit();
+
+            Query consulta = session.getNamedQuery("Funcionario.BuscarCPF");
+            consulta.setString("cpf", cpf);
+            funcionario = (Funcionario) consulta.uniqueResult();
         } catch (Exception erroConsultaMatricula) {
             System.out.println("não conseguimos buscar pelo matricula!!");
             erroConsultaMatricula.printStackTrace();
-        }finally{
+        } finally {
             session.close();
         }
         return funcionario;
@@ -121,7 +124,7 @@ public class FuncionarioDao implements FuncionarioModel {
 
     @Override
     public Funcionario listaId(Integer codigo) {
-         Funcionario funcionario = new Funcionario();
+        Funcionario funcionario = new Funcionario();
         sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
@@ -132,7 +135,7 @@ public class FuncionarioDao implements FuncionarioModel {
         } catch (Exception erroConsultaFuncionario) {
             System.out.println("falha na busca");
             erroConsultaFuncionario.printStackTrace();
-        }finally{
+        } finally {
             session.close();
         }
         return funcionario;

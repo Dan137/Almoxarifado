@@ -7,8 +7,8 @@ package com.almoxarifado.model.dao.teste;
 
 import com.almoxarifado.controller.EmprestimoControler;
 import com.almoxarifado.controller.FuncionarioControler;
-import com.almoxarifado.model.Emprestimo;
-import com.almoxarifado.model.Funcionario;
+import com.almoxarifado.model.Entidades.Emprestimo;
+import com.almoxarifado.model.Entidades.Funcionario;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

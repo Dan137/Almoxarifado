@@ -5,7 +5,7 @@
  */
 package com.almoxarifado.controller;
 
-import com.almoxarifado.model.Emprestimo;
+import com.almoxarifado.model.Entidades.Emprestimo;
 import com.almoxarifado.model.dao.EmprestimoDao;
 import java.util.List;
 

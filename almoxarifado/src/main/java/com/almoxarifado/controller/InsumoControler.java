@@ -5,7 +5,7 @@
  */
 package com.almoxarifado.controller;
 
-import com.almoxarifado.model.Insumo;
+import com.almoxarifado.model.Entidades.Insumo;
 import com.almoxarifado.model.dao.InsumoDao;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

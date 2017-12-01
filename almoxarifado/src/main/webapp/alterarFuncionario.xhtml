@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:include src="menu.xhtml"/>
+    <body>
+
+
+        <h:form id="altCadFuncionario">
+    <p:growl id="growl" life="10000" showDetail="true" showSummary="false"/>
+            <h3 style="margin-top:0">Alterar funcionarios</h3>
+
+            <p:panelGrid columns="2">
+
+                <h:outputLabel value="nome: "/>
+                <p:inputText value="#{funcionaroBean.funcionario.nome}"/>
+
+                <h:outputLabel value="matricula: "/>
+                <p:inputText value="#{funcionaroBean.funcionario.matricula}"/>
+
+                <h:outputLabel value="cargo: "/>
+                <p:inputText value="#{funcionaroBean.funcionario.cargo}"/>
+
+                <h:outputLabel value="CPF: "/>
+                <p:inputText value="#{funcionaroBean.funcionario.cpf}"/>
+
+                <h:outputLabel value="dataAdmissao: "/>
+                <p:inputText value="#{funcionaroBean.funcionario.dataAdmissao}"/>
+
+                <h:outputLabel value="telefone: "/>
+                <p:inputText value="#{funcionaroBean.funcionario.telefone}"/>
+
+            </p:panelGrid>
+            <h1></h1>
+            <p:commandButton value="Salvar" action="#{funcionaroBean.alterar(funcionaroBean.funcionario)}" update="altCadFuncionario"/>
+            <p:commandButton value="Excluir" action="#{funcionaroBean.deletar(funcionaroBean.funcionario)}" update="altCadFuncionario"/>
+            <p:commandButton value="Voltar" action="visualizarFuncionario.xhtml"/>
+        </h:form>
+    </body>
+</html>

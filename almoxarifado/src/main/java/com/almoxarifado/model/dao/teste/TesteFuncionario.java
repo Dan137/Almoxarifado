@@ -6,7 +6,7 @@
 package com.almoxarifado.model.dao.teste;
 
 import com.almoxarifado.controller.FuncionarioControler;
-import com.almoxarifado.model.Funcionario;
+import com.almoxarifado.model.Entidades.Funcionario;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -51,7 +51,7 @@ public class TesteFuncionario {
                     lista.add(funcionario3);
                   
                     for (Funcionario f : lista){
-                        funcionarioCtrl.cadastrar(f);
+                  //      funcionarioCtrl.cadastrar(f);
                     }
                     break;
 
