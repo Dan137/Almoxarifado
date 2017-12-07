@@ -7,7 +7,10 @@ package com.almoxarifado.model.dao.teste;
 
 import com.almoxarifado.controller.FuncionarioControler;
 import com.almoxarifado.model.Entidades.Funcionario;
+import com.almoxarifado.model.FuncionarioModel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,7 +28,7 @@ public class TesteFuncionario {
         String dataAdmissao;
         String telefone;
         String matricula;
-        FuncionarioControler funcionarioCtrl = new FuncionarioControler();
+        FuncionarioModel funcionarioModel = new FuncionarioModel();
 
         Scanner sc = new Scanner(System.in);
         int op = 0;
@@ -37,30 +40,35 @@ public class TesteFuncionario {
                     + "4. buscar o funcionario pelo ID\n"
                     + "5. deletar um funcionario");
             op = sc.nextInt();
+
+            Date dataCadastro = new Date();
+            SimpleDateFormat formataDate = new SimpleDateFormat("dd/MM/yyyy");
+            String dataHoje = formataDate.format(dataCadastro);
             switch (op) {
+
                 case 1:
 
                     List<Funcionario> lista = new ArrayList<>();
-                   
-                    Funcionario funcionario1 = new Funcionario(0, "20152d13gr0059", "Danie", "A.S.G", "703.968.604-00", "09/03/2017", "(87) 9.8135-5794" /*TesteFuncionario.getMateriais()*/);
-                    Funcionario funcionario2 = new Funcionario(0, "20141d14gr4321", "everton", "A.S.G", "123.456.678-91", "21/02/2017", "(87) 9.8153-3492" /*TesteFuncionario.getMateriais()*/);
-                    Funcionario funcionario3 = new Funcionario(0, "1d123kjfd", "tiago", "gari", "132.132.149.93", "23/03/2014", "(87) 9.8133-3938" /*TesteFuncionario.getMateriais()*/);
+
+                    Funcionario funcionario1 = new Funcionario(0, "20152d13gr0059", "Daniel", "A.S.G", "703.968.604-00", dataCadastro, "(87) 9.8135-5794" /*TesteFuncionario.getMateriais()*/);
+                    Funcionario funcionario2 = new Funcionario(0, "20141d14gr4321", "everton", "A.S.G", "123.456.678-91", dataCadastro, "(87) 9.8153-3492" /*TesteFuncionario.getMateriais()*/);
+                    Funcionario funcionario3 = new Funcionario(0, "1d123kjfd", "tiago", "gari", "132.132.149.93", dataCadastro, "(87) 9.8133-3938" /*TesteFuncionario.getMateriais()*/);
 
                     lista.add(funcionario1);
                     lista.add(funcionario2);
                     lista.add(funcionario3);
-                  
-                    for (Funcionario f : lista){
-                  //      funcionarioCtrl.cadastrar(f);
+
+                    for (Funcionario f : lista) {
+                        funcionarioModel.salvar(f);
                     }
                     break;
 
                 case 2:
-                    Funcionario funcionario = new Funcionario(27, "2d3c4a", "Noemi", "A.S.G", "153.834.434-02", "09/03/2016", "(87)9.8135-3212");
-                    funcionarioCtrl.alterar(funcionario);
+                    Funcionario funcionario = new Funcionario(2, "2d3c4a", "Noemi", "A.S.G", "153.834.434-02", dataCadastro, "(87)9.8135-3212");
+                    funcionarioModel.atualizar(funcionario);
                     break;
                 case 3:
-                    List<Funcionario> funcionarios = funcionarioCtrl.listarTodos();
+                    List<Funcionario> funcionarios = funcionarioModel.findAll();
                     System.out.println("funcionarios cadastrados");
                     for (Funcionario f : funcionarios) {
                         System.out.println("nome: " + f.getNome());
@@ -77,7 +85,7 @@ public class TesteFuncionario {
                 case 4:
                     System.out.println("digite o ID para buscar o funcionario");
                     id = sc.nextInt();
-                    funcionario1 = funcionarioCtrl.consultaPorId(id);
+                    funcionario1 = funcionarioModel.buscarPeloId(id);
 
                     System.out.println("nome: " + funcionario1.getNome());
                     System.out.println("codigo: " + funcionario1.getCodigo());
@@ -90,8 +98,8 @@ public class TesteFuncionario {
                 case 5:
                     System.out.println("informe o id para deletar");
                     id = sc.nextInt();
-                    funcionario1 = funcionarioCtrl.consultaPorId(id);
-                    funcionarioCtrl.deletar(funcionario1);
+                    funcionario1 = funcionarioModel.buscarPeloId(id);
+                    funcionarioModel.deletar(funcionario1);
             }
 
         } while (op != 0);

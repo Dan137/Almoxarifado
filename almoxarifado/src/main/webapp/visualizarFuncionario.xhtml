@@ -10,27 +10,25 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-      
+
     <ui:include src="menu.xhtml"/>
     <body>
         <h:form id="listarfu">
             <p:growl id="growl" life="10000" showDetail="true" showSummary="false"/>
-             <h3 style="margin-top:0">Listar Funcionario</h3>
-             <p:commandButton value="excluir" action="#{funcionaroBean.deletar(funcionaroBean.funcionario)}" update="listafu"/>
-             <p:commandButton value="Alterar" action="alterarFuncionario.xhtml"/>
-             <p:dataTable  emptyMessage="nenhum registro encontrado." id="listafu" var="fun" value="#{funcionaroBean.listarTodos()}" 
-                           selectionMode="single" selection="#{funcionaroBean.funcionario}" rowKey="#{fun.codigo}" 
->
-                 <p:column headerText="Matricula"  filterBy="#{fun.matricula}">
-                     <h:outputText  value="#{fun.matricula}" ></h:outputText>
+            <h3 style="margin-top:0">Listar Funcionario</h3>
+
+            <p:dataTable  emptyMessage="nenhum registro encontrado." id="listafu" var="fun" value="#{funcionaroBean.listarTodos()}" 
+                          selectionMode="single" selection="#{funcionaroBean.funcionario}" rowKey="#{fun.codigo}" >
+                <p:column headerText="Matricula"  filterBy="#{fun.matricula}">
+                    <h:outputText  value="#{fun.matricula}" ></h:outputText>
                 </p:column>
-                 <p:column headerText="Nome"  filterBy="#{fun.nome}">
+                <p:column headerText="Nome"  filterBy="#{fun.nome}">
                     <h:outputText  value="#{fun.nome}" ></h:outputText>
                 </p:column>
-               <p:column headerText="CPF">
+                <p:column headerText="CPF">
                     <h:outputText value="#{fun.cpf}"></h:outputText>
                 </p:column>
-                
+
                 <p:column headerText="Cargo:">
                     <h:outputText value="#{fun.cargo}"></h:outputText>
                 </p:column>
@@ -39,9 +37,13 @@ and open the template in the editor.
                 </p:column>
                 <p:column headerText="Telefone:">
                     <h:outputText value="#{fun.telefone}"></h:outputText>
-</p:column>
-             </p:dataTable>
+                </p:column>
+            </p:dataTable>
+            
+            <p:commandButton value="excluir" action="#{funcionaroBean.deletar(funcionaroBean.funcionario)}" update="listafu"/>
+            <p:commandButton value="Alterar" action="alterarFuncionario.xhtml"/>
+
         </h:form>     
-    
+
     </body>
 </html>

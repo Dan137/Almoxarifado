@@ -28,7 +28,7 @@ public class Messages {
 
         return message;
     }
-
+    
     public void adicionarMensagem(String sumario, String detalhe, FacesMessage.Severity tipoErro) {
         FacesContext context = FacesContext.getCurrentInstance();
         FacesMessage mensagem = new FacesMessage(tipoErro, sumario, detalhe);

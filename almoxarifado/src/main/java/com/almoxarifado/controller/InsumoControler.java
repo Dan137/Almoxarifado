@@ -15,17 +15,17 @@ import javax.faces.bean.SessionScoped;
  *
  * @author Daniel
  */
-@ManagedBean (name = "materialBean")
+@ManagedBean (name = "insumoBean")
 @SessionScoped
 public class InsumoControler {
-    private Insumo material;
-    private Insumo selectedMaterial;
+    private Insumo insumo;
+    private Insumo selectedInsumo;
     
     public InsumoControler() {
-        material = new Insumo();
+        insumo = new Insumo();
     }
-    public void cadastrar(Insumo material){
-        InsumoDao.getInstance().cadastrar(material);
+    public void cadastrar(Insumo insumo){
+        InsumoDao.getInstance().cadastrar(insumo);
     }
     public void alterar  (Insumo insumo){
         InsumoDao.getInstance().alterar(insumo);
@@ -34,37 +34,37 @@ public class InsumoControler {
         InsumoDao.getInstance().deletar(insumo);
     }
     public List <Insumo> listarTudo (){
-        List<Insumo> materiais = InsumoDao.getInstance().listarTudo();
-        return materiais;
+        List<Insumo> insumo = InsumoDao.getInstance().listarTudo();
+        return insumo;
         
     }
     public Insumo listaId (Integer codigo){
-        Insumo material=InsumoDao.getInstance().listaId(codigo);
+        Insumo insumo=InsumoDao.getInstance().listaId(codigo);
         
-        return material;
+        return insumo;
     
 }
 
     /**
-     * @return the material
+     * @return the insumo
      */
-    public Insumo getMaterial() {
-        return material;
+    public Insumo getInsumo() {
+        return insumo;
     }
 
     /**
-     * @param material the material to set
+     * @param material the insumo to set
      */
-    public void setMaterial(Insumo material) {
-        this.material = material;
+    public void setMaterial(Insumo insumo) {
+        this.insumo = insumo;
     }
 
-    public Insumo getSelectedMaterial() {
-        return selectedMaterial;
+    public Insumo getSelectedInsumo() {
+        return selectedInsumo;
     }
 
-    public void setSelectedMaterial(Insumo selectedMaterial) {
-        this.selectedMaterial = selectedMaterial;
+    public void setSelectedInsumo(Insumo selectedMaterial) {
+        this.selectedInsumo = selectedMaterial;
     }
     
 }

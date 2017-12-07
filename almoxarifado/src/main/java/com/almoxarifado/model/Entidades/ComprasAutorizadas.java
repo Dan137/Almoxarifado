@@ -34,8 +34,7 @@ public class ComprasAutorizadas implements Serializable {
     private Date dataCompra;
     @OneToOne(targetEntity = Funcionario.class, cascade = CascadeType.ALL)
     private Funcionario funcionario;
-    @OneToMany(targetEntity = Insumo.class, mappedBy = "compraAutorizada", cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Insumo> insumos;
 
     public ComprasAutorizadas() {

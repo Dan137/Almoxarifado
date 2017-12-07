@@ -6,6 +6,7 @@
 package com.almoxarifado.model.Entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -37,7 +39,8 @@ public class Funcionario implements Serializable {
     @Column(length = 20)
     private String cpf;
     @Column(length = 20)
-    private String dataAdmissao;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataAdmissao;
     @Column(length = 25)
     private String telefone;
    
@@ -48,7 +51,7 @@ public class Funcionario implements Serializable {
     public Funcionario() {
     }
 
-    public Funcionario(Integer codigo, String matricula, String nome, String cargo, String cpf, String dataAdmissao, String telefone /*List<Material> material*/) {
+    public Funcionario(Integer codigo, String matricula, String nome, String cargo, String cpf, Date dataAdmissao, String telefone /*List<Material> material*/) {
         this.codigo = codigo;
         
         this.matricula = matricula;
@@ -92,14 +95,15 @@ public class Funcionario implements Serializable {
         this.cpf = cpf;
     }
 
-    public String getDataAdmissao() {
+    public Date getDataAdmissao() {
         return dataAdmissao;
     }
 
-    public void setDataAdmissao(String dataAdmissao) {
+    public void setDataAdmissao(Date dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
     }
 
+    
     public String getTelefone() {
         return telefone;
     }
@@ -112,7 +116,7 @@ public class Funcionario implements Serializable {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 

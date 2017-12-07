@@ -12,8 +12,6 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:include src="menu.xhtml"/>
     <body>
-
-
         <h:form id="formCadFuncionario">
 <p:growl id="growl" life="10000" showDetail="true" showSummary="false"/>
             <h3 style="margin-top:0">Cadastro de funcionarios</h3>
@@ -37,10 +35,12 @@ requiredMessage="Cargo é obrigatória"/>
 requiredMessage="CPF é obrigatória"></p:inputMask>
 
                 <h:outputLabel value="dataAdmissao: "/>
-                <p:inputText value="#{funcionaroBean.funcionario.dataAdmissao}"/>
-
-                <h:outputLabel value="telefone: "/>
-                <p:inputText value="#{funcionaroBean.funcionario.telefone}"/>
+                <p:inputMask id="dataAdmis" mask='99/99/9999' value="#{funcionaroBean.funcionario.dataAdmissao}">
+                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+                </p:inputMask>
+                
+                <h:outputLabel value="telefone: " value="#{funcionaroBean.funcionario.telefone}"/>
+                <p:inputMask mask='(99) 9999-9999'/>
 
             </p:panelGrid>
             <h1></h1>

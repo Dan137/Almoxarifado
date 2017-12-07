@@ -7,6 +7,7 @@ package com.almoxarifado.controller;
 
 import com.almoxarifado.Util.Messages;
 import com.almoxarifado.model.Entidades.Funcionario;
+import com.almoxarifado.model.FuncionarioModel;
 import com.almoxarifado.model.dao.FuncionarioDao;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -20,15 +21,17 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean(name="funcionaroBean")
 @SessionScoped
 public class FuncionarioControler {
-
+    
+    private FuncionarioModel funcionariomodel;
     private Funcionario funcionario;
 
     public FuncionarioControler() {
+        this.funcionariomodel = funcionariomodel;
         funcionario = new Funcionario();
     }
 
     public void cadastrar(Funcionario funcionario) {
-        FuncionarioDao.getInstance().cadastrar(funcionario);
+        funcionariomodel.salvar(funcionario);
         limpar();
    Messages.getInstance().adicionarMensagem(null, "Funcionario cadastrado com sucesso!", FacesMessage.SEVERITY_INFO);
         
